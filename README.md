@@ -57,3 +57,38 @@ for i in 1..=5 {
     println!("val:{}" , i)
 }
 ```
+
+bool 类型
+
+### rust 所有权的理解
+
+1. rust 的值有且只有一个 所有者；
+
+2. 当所有者离开作用域范围时，这个值将被丢弃；
+
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1;
+
+    println!("{}, world!", s1);
+}
+```
+
+上述代码是所有权转移之后， 将会看到以下的报错：
+
+```
+error[E0382]: use of moved value: `s1`
+ --> src/main.rs:5:28
+  |
+3 |     let s2 = s1;
+  |         -- value moved here
+4 |
+5 |     println!("{}, world!", s1);
+  |                            ^^ value used here after move
+  |
+  = note: move occurs because `s1` has type `std::string::String`, which does
+  not implement the `Copy` trait
+```
+
